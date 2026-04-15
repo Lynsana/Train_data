@@ -1,0 +1,18 @@
+{
+  "data_file": "hotel_bookings.csv",
+  "raw_rows": 119390,
+  "raw_columns": 34,
+  "arrival_start": "2015-07-01",
+  "arrival_end": "2017-08-31",
+  "final_feature_count": 37,
+  "best_threshold": 0.12,
+  "best_model": "ImprovedXGBoost",
+  "best_model_auc": 0.8830843148355694,
+  "best_model_f1": 0.6897092775648354,
+  "cross_validation_auc_mean": 0.9541,
+  "cross_validation_f1_mean": 0.7897,
+  "best_dynamic_model": "DynamicImprovedXGBoost",
+  "best_dynamic_auc": 0.8927,
+  "best_duplicate_scenario": "\u4fdd\u7559\u5168\u90e8\u6837\u672c",
+  "best_duplicate_auc": 0.8842
+}

@@ -1,0 +1,3 @@
+﻿model,feature_count,threshold,accuracy,auc,pr_auc,recall,precision,f1,business_gain,high_value_capture_rate
+DynamicImprovedXGBoost,42,0.14,0.6736,0.8927,0.847,0.9819,0.5433,0.6996,6293983.8213,0.9876
+StaticImprovedXGBoost,37,0.12,0.6555,0.8842,0.8364,0.981,0.5297,0.6879,6256275.1479,0.9887

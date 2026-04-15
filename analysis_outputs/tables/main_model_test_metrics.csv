@@ -1,0 +1,2 @@
+﻿threshold,accuracy,auc,pr_auc,recall,precision,f1,business_gain,high_value_capture_rate
+0.12,0.6598,0.8831,0.8356,0.9771,0.5329,0.6897,6244306.0523,0.985

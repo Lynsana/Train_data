@@ -1,0 +1,18 @@
+{
+  "n_estimators": 387,
+  "max_depth": 7,
+  "learning_rate": 0.043023757338213724,
+  "subsample": 0.8291436817623189,
+  "colsample_bytree": 0.8469078305489502,
+  "min_child_weight": 3,
+  "reg_lambda": 0.7246224187614453,
+  "gamma": 1.9624654365341334,
+  "random_state": 42,
+  "n_jobs": -1,
+  "tree_method": "hist",
+  "eval_metric": [
+    "auc",
+    "logloss"
+  ],
+  "early_stopping_rounds": 30
+}
