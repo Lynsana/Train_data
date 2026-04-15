@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>酒店取消风险运营复盘报告</title>
+  <style>
+    :root {
+      --bg: #eef1f8;
+      --paper: #ffffff;
+      --ink: #1e2758;
+      --muted: #65709a;
+      --line: #dfe4f2;
+      --accent: #4b7bec;
+      --accent-soft: rgba(75, 123, 236, 0.12);
+      --shadow: 0 18px 36px rgba(39, 48, 107, 0.08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(140, 84, 255, 0.16), transparent 24%),
+        linear-gradient(180deg, #f5f7fd 0%, #eef1f8 100%);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 28px 20px 44px;
+    }
+    .hero {
+      background:
+        radial-gradient(circle at right top, rgba(82, 145, 255, 0.24), transparent 32%),
+        linear-gradient(135deg, #3127af 0%, #2e2ab2 58%, #4b8cff 100%);
+      color: #ffffff;
+      border-radius: 30px;
+      padding: 30px 32px;
+      box-shadow: 0 22px 42px rgba(37, 47, 104, 0.16);
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+    h1 {
+      margin: 14px 0 10px;
+      font-size: 38px;
+      line-height: 1.2;
+    }
+    .subtitle {
+      margin: 0;
+      max-width: 900px;
+      color: rgba(255, 255, 255, 0.82);
+    }
+    .meta-grid,
+    .card-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    .meta-card,
+    .summary-card,
+    .report-section {
+      background: var(--paper);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+    .meta-card {
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+    .meta-card span {
+      display: block;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 12px;
+    }
+    .meta-card strong {
+      display: block;
+      margin-top: 6px;
+      color: #ffffff;
+      font-size: 18px;
+    }
+    .summary-card {
+      padding: 18px 20px;
+    }
+    .summary-label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .summary-value {
+      display: block;
+      margin-top: 10px;
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .summary-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 13px;
+    }
+    .report-section {
+      margin-top: 20px;
+      padding: 24px 26px;
+    }
+    .section-head h2 {
+      margin: 0 0 8px;
+      font-size: 26px;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .report-image {
+      width: 100%;
+      margin-top: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+    }
+    .table-wrap {
+      margin-top: 18px;
+      overflow-x: auto;
+    }
+    .table-wrap table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      background: #ffffff;
+    }
+    .table-wrap th,
+    .table-wrap td {
+      padding: 12px 10px;
+      border: 1px solid var(--line);
+      text-align: left;
+      font-size: 13px;
+      color: #32406f;
+    }
+    .table-wrap th {
+      background: #f5f7fd;
+      color: #59668e;
+    }
+    @media (max-width: 768px) {
+      .page { padding: 18px 14px 32px; }
+      .hero, .report-section { padding: 20px; }
+      h1 { font-size: 30px; }
+      .summary-value { font-size: 24px; }
+      .section-head h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <span class="eyebrow">酒店预订数据分析与预测</span>
+      <h1>酒店取消风险运营复盘报告</h1>
+      <p class="subtitle">面向业务运营经理的复盘导出，覆盖处理状态、处置结果、酒店执行表现与策略效果排行。</p>
+      
+    <div class="tag-row">
+      <span class="tag">风险订单</span><span class="tag">干预执行</span><span class="tag">策略复盘</span><span class="tag">运营导出</span>
+    </div>
+  
+      
+      <div class="meta-grid">
+        
+              <div class="meta-card">
+                <span>导出角色</span>
+                <strong>业务运营经理</strong>
+              </div>
+            
+              <div class="meta-card">
+                <span>导出人</span>
+                <strong>业务运营经理</strong>
+              </div>
+            
+              <div class="meta-card">
+                <span>生成时间</span>
+                <strong>2026/3/20 03:53:40</strong>
+              </div>
+            
+              <div class="meta-card">
+                <span>数据范围</span>
+                <strong>当前数据库最新干预记录</strong>
+              </div>
+            
+      </div>
+    
+    </section>
+    
+    <section class="card-grid">
+      
+            <article class="summary-card">
+              <span class="summary-label">干预总记录数</span>
+              <strong class="summary-value">3,000</strong>
+              <p class="summary-note">累计已写入干预记录表的处置记录数</p>
+            </article>
+          
+            <article class="summary-card">
+              <span class="summary-label">订单保留数</span>
+              <strong class="summary-value">0</strong>
+              <p class="summary-note">处理结果记录为订单保留的订单数量</p>
+            </article>
+          
+            <article class="summary-card">
+              <span class="summary-label">整体订单保留率</span>
+              <strong class="summary-value">0.00%</strong>
+              <p class="summary-note">按实际未取消订单占比计算</p>
+            </article>
+          
+    </section>
+  
+    
+        <section class="report-section">
+          <div class="section-head">
+            <h2>处理状态分布</h2>
+            <p>复盘当前干预记录的处理状态结构。</p>
+          </div>
+          
+      <table style="width: 100%; border-collapse: collapse; min-width: 640px;">
+        <thead>
+          <tr>
+            <th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">处理状态</th><th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">数量</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+                <tr>
+                  <td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">已处置</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">3000</td>
+                </tr>
+              
+        </tbody>
+      </table>
+    
+          
+          
+        </section>
+      
+        <section class="report-section">
+          <div class="section-head">
+            <h2>处理结果分布</h2>
+            <p>查看订单保留、订单取消和待观察等结果分布。</p>
+          </div>
+          
+      <table style="width: 100%; border-collapse: collapse; min-width: 640px;">
+        <thead>
+          <tr>
+            <th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">处理结果</th><th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">数量</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+                <tr>
+                  <td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">订单取消</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">3000</td>
+                </tr>
+              
+        </tbody>
+      </table>
+    
+          
+          
+        </section>
+      
+        <section class="report-section">
+          <div class="section-head">
+            <h2>酒店执行表现</h2>
+            <p>对比不同酒店业态下的干预规模与保留率。</p>
+          </div>
+          
+      <table style="width: 100%; border-collapse: collapse; min-width: 640px;">
+        <thead>
+          <tr>
+            <th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">酒店类型</th><th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">已处理订单</th><th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">平均概率</th><th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">订单保留率(%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+                <tr>
+                  <td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">City Hotel</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">2766</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0.7476</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0.00</td>
+                </tr>
+              
+                <tr>
+                  <td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">Resort Hotel</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">234</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0.7537</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0.00</td>
+                </tr>
+              
+        </tbody>
+      </table>
+    
+          
+          
+        </section>
+      
+        <section class="report-section">
+          <div class="section-head">
+            <h2>策略复盘排行</h2>
+            <p>按已处理订单数和订单保留率查看策略效果。</p>
+          </div>
+          
+      <table style="width: 100%; border-collapse: collapse; min-width: 640px;">
+        <thead>
+          <tr>
+            <th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">策略名称</th><th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">已处理订单</th><th style="padding: 12px 10px; border: 1px solid #dfe4f2; background: #f5f7fd; color: #59668e; text-align: left;">订单保留率(%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+                <tr>
+                  <td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">高风险押金确认策略</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">1745</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0.00</td>
+                </tr>
+              
+                <tr>
+                  <td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">极高风险人工复核策略</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">1255</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0.00</td>
+                </tr>
+              
+                <tr>
+                  <td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">低风险常规服务策略</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0.00</td>
+                </tr>
+              
+                <tr>
+                  <td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">中风险二次确认策略</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0</td><td style="padding: 12px 10px; border: 1px solid #dfe4f2; color: #32406f;">0.00</td>
+                </tr>
+              
+        </tbody>
+      </table>
+    
+          
+          
+        </section>
+      
+  </main>
+</body>
+</html>
